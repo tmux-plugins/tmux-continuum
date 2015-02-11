@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+
+source "$CURRENT_DIR/helpers.sh"
+source "$CURRENT_DIR/variables.sh"
+
+supported_tmux_version_ok() {
+	$CURRENT_DIR/check_tmux_version.sh "$SUPPORTED_VERSION"
+}
+
+current_timestamp() {
+	echo "$(date +%s)"
+}
+
+set_last_save_timestamp() {
+	set_tmux_option "$last_auto_save_option" "$(current_timestamp)"
+}
+
+enough_time_since_last_run_passed() {
+	local last_saved_timestamp="$(get_tmux_option "$last_auto_save_option" "0")"
+	local interval_minutes="$(get_tmux_option "$auto_save_interval_option" "$auto_save_interval_default")"
+	local interval_seconds="$((interval_minutes * 60))"
+	local next_run="$((last_saved_timestamp + $interval_seconds))"
+	[ "$(current_timestamp)" -ge "$next_run" ]
+}
+
+fetch_and_run_tmux_resurrect_save_script() {
+	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "")"
+	if [ -n "$resurrect_save_script_path" ]; then
+		$resurrect_save_script_path "no-spinner"
+		set_last_save_timestamp
+	fi
+}
+
+main() {
+	if supported_tmux_version_ok && enough_time_since_last_run_passed; then
+		fetch_and_run_tmux_resurrect_save_script
+	fi
+}
+main

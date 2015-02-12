@@ -6,6 +6,10 @@ source "$CURRENT_DIR/helpers.sh"
 source "$CURRENT_DIR/variables.sh"
 source "$CURRENT_DIR/shared.sh"
 
+supported_tmux_version_ok() {
+	$CURRENT_DIR/check_tmux_version.sh "$SUPPORTED_VERSION"
+}
+
 get_interval() {
 	get_tmux_option "$auto_save_interval_option" "$auto_save_interval_default"
 }

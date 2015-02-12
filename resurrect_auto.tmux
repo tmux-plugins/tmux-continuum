@@ -8,6 +8,10 @@ source "$CURRENT_DIR/scripts/shared.sh"
 
 save_command_interpolation="#($CURRENT_DIR/scripts/resurrect_auto_save.sh)"
 
+supported_tmux_version_ok() {
+	$CURRENT_DIR/scripts/check_tmux_version.sh "$SUPPORTED_VERSION"
+}
+
 add_resurrect_save_interpolation() {
 	local status_right_value="$(get_tmux_option "status-right" "")"
 	local new_value="${save_command_interpolation}${status_right_value}"

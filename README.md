@@ -76,11 +76,24 @@ Most likely no. A regular save file is in the range of 5Kb. That said, it
 would be good to clean out old save files from `~/.tmux/resurrect/` dir from
 time to time.
 
-### Configuration
+> How do I change the save interval to i.e. 1 hour?
 
-- set the save interval to 60 minutes (the default is 15, the number is always in minutes)
+The interval is always measured in minutes. So setting the interval to `60`
+(minutes) will do the trick. Put this in `.tmux.conf`:
 
-        set -g @resurrect-auto-save-interval '60'
+    set -g @resurrect-auto-save-interval '60'
+
+and then source `tmux.conf` by executing this command in the shell
+`tmux source ~/.tmux.conf`.
+
+> How do I stop automatic saving?
+
+Just set the save interval to `0`. Put this in `.tmux.conf`
+
+    set -g @resurrect-auto-save-interval '0'
+
+and then source `tmux.conf` by executing this command in the shell
+`tmux source ~/.tmux.conf`.
 
 ### Other goodies
 

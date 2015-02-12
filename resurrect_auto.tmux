@@ -2,9 +2,9 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-source "$CURRENT_DIR/helpers.sh"
-source "$CURRENT_DIR/variables.sh"
-source "$CURRENT_DIR/shared.sh"
+source "$CURRENT_DIR/scripts/helpers.sh"
+source "$CURRENT_DIR/scripts/variables.sh"
+source "$CURRENT_DIR/scripts/shared.sh"
 
 save_command_interpolation="#($CURRENT_DIR/scripts/resurrect_auto_save.sh)"
 

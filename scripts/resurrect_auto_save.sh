@@ -6,10 +6,6 @@ source "$CURRENT_DIR/helpers.sh"
 source "$CURRENT_DIR/variables.sh"
 source "$CURRENT_DIR/shared.sh"
 
-supported_tmux_version_ok() {
-	$CURRENT_DIR/check_tmux_version.sh "$SUPPORTED_VERSION"
-}
-
 enough_time_since_last_run_passed() {
 	local last_saved_timestamp="$(get_tmux_option "$last_auto_save_option" "0")"
 	local interval_minutes="$(get_tmux_option "$auto_save_interval_option" "$auto_save_interval_default")"

@@ -15,9 +15,11 @@ add_resurrect_save_interpolation() {
 }
 
 main() {
-	# Don't start saving right after tmux is started.
-	# We wanna give user a chance to restore previous session.
-	set_last_save_timestamp
-	add_resurrect_save_interpolation
+	if supported_tmux_version_ok; then
+		# Don't start saving right after tmux is started.
+		# We wanna give user a chance to restore previous session.
+		set_last_save_timestamp
+		add_resurrect_save_interpolation
+	fi
 }
 main

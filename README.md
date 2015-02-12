@@ -11,8 +11,9 @@ Requirements / dependencies: `tmux 1.9` or higher, `bash`,
 
 ### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
 
-Please make sure you have
-[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) installed.
+Please make sure you have the latest version of
+[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) installed (as
+of Feb 2015).
 
 Add plugin to the list of TPM plugins in `.tmux.conf`:
 
@@ -27,8 +28,9 @@ automatically start "working" in the background, no action required.
 
 ### Manual Installation
 
-Please make sure you have
-[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) installed.
+Please make sure you have the latest version of
+[tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) installed (as
+of Feb 2015).
 
 Clone the repo:
 

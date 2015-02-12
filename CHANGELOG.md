@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v1.0.0, 2015-02-12
 - first working version
 - run the save script in the background
 - do not start saving right after tmux is started

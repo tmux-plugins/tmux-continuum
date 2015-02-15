@@ -1,12 +1,24 @@
 # tmux-resurrect-auto
 
-Continuous saving of tmux environment.
+Continuous saving of tmux environment. Automatic restore when tmux is started.
+
+#### Continuous saving
 
 After this plugin is installed, `tmux-resurrect` will save environment at the
 interval of 15 minutes. All the saving happens in the background without the
 impact to your workflow.
 
-Requirements / dependencies: `tmux 1.9` or higher, `bash`,
+#### Automatic restore
+
+Last saved environment is automatically restored when tmux server is started.
+Put `set -g @resurrect-auto-restore 'on'` in `tmux.conf` to enable this.
+
+Note: automatic restore happens **exclusively** on tmux server start. No other
+action (e.g. sourcing `tmux.conf`) triggers this.
+
+#### Dependencies
+
+`tmux 1.9` or higher, `bash`,
 [tmux-resurrect](https://github.com/tmux-plugins/tmux-resurrect) plugin.
 
 ### Installation with [Tmux Plugin Manager](https://github.com/tmux-plugins/tpm) (recommended)
@@ -52,8 +64,9 @@ required.
 
 > Will a previous save be overwritten immediately after I start tmux?
 
-No, first automatic save starts 15 minutes after tmux is started. That gives you
-enough time to restore from a previous save.
+No, first automatic save starts 15 minutes after tmux is started. If automatic
+restore is not enabled, that gives you enough time to manually restore from a
+previous save.
 
 > I want to make a restore to a previous point in time, but it seems that save
 is now overwritten?
@@ -66,7 +79,7 @@ Here are the steps to restore to a previous point in time:
 - `$ cd ~/.tmux/resurrect/`
 - locate the save file you'd like to use for restore (file names have a timestamp)
 - symlink the `last` file to the desired save file: `$ ln -sf <file_name> last`
-- do a restore with `prefix + Ctrl-r`
+- do a restore with `tmux-resurrect` binding: `prefix + Ctrl-r`
 
 You should now be restored to the time when `<file_name>` save happened.
 
@@ -94,6 +107,15 @@ Just set the save interval to `0`. Put this in `.tmux.conf`
 
 and then source `tmux.conf` by executing this command in the shell
 `tmux source ~/.tmux.conf`.
+
+> I had automatic restore turned on, how do I disable it now?
+
+Just remove `set -g @resurrect-auto-restore 'on'` from `tmux.conf`.
+
+To be absolutely sure automatic restore doesn't happen, create a
+`tmux_no_auto_restore` file in your home directory (command:
+`touch ~/tmux_no_auto_restore`). Automatic restore won't happen if this file
+exists.
 
 ### Other goodies
 

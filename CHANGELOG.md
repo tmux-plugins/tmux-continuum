@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- enable automatic environment restore when tmux is started
 
 ### v1.0.0, 2015-02-12
 - first working version

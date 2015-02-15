@@ -9,3 +9,8 @@ auto_save_interval_option="@resurrect-auto-save-interval"
 
 # time when the tmux environment was last saved (unix timestamp)
 last_auto_save_option="@resurrect-auto-save-last-timestamp"
+
+auto_restore_option="@resurrect-auto-restore"
+auto_restore_default="off"
+
+auto_restore_halt_file="${HOME}/tmux_no_auto_restore"

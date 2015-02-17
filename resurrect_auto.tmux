@@ -12,6 +12,10 @@ supported_tmux_version_ok() {
 	$CURRENT_DIR/scripts/check_tmux_version.sh "$SUPPORTED_VERSION"
 }
 
+handle_tmux_automatic_start() {
+	$CURRENT_DIR/scripts/handle_tmux_automatic_start.sh
+}
+
 add_resurrect_save_interpolation() {
 	local status_right_value="$(get_tmux_option "status-right" "")"
 	local new_value="${save_command_interpolation}${status_right_value}"
@@ -31,6 +35,8 @@ start_auto_restore_in_background() {
 
 main() {
 	if supported_tmux_version_ok; then
+		handle_tmux_automatic_start
+
 		# Don't start saving right after tmux is started.
 		# We wanna give user a chance to restore previous session.
 		set_last_save_timestamp

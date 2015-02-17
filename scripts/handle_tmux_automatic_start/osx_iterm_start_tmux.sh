@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# for "true full screen" call the script with "true" as the first argument
+# for "true full screen" call the script with "fullscreen" as the first argument
 TRUE_FULL_SCREEN="$1"
 
 start_iterm_and_run_tmux() {
@@ -52,7 +52,7 @@ resize_to_true_full_screen() {
 
 main() {
 	start_iterm_and_run_tmux
-	if [ "$TRUE_FULL_SCREEN" == "true" ]; then
+	if [ "$TRUE_FULL_SCREEN" == "fullscreen" ]; then
 		resize_to_true_full_screen
 	else
 		resize_window_to_full_screen

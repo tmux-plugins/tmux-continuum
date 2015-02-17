@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- enable "tmux auto start" for OS X
 
 ### v2.0.0, 2015-02-15
 - enable automatic environment restore when tmux is started

@@ -1,16 +1,32 @@
 # tmux-resurrect-auto
 
-Continuous saving of tmux environment. Automatic restore when tmux is started.
+Features:
+
+- continuous saving of tmux environment
+- automatic tmux start when computer/server is on
+- automatic restore when tmux is started
+
+These features enable uninterrupted tmux usage. No matter the computer or server
+restarts, if the machine is on, tmux will be there how you left it off the last
+time it was used.
 
 #### Continuous saving
 
-After this plugin is installed, `tmux-resurrect` will save environment at the
-interval of 15 minutes. All the saving happens in the background without the
-impact to your workflow.
+Tmux environment will be saved at the interval of 15 minutes. All the saving
+happens in the background without the impact to your workflow.
+
+This action starts automatically when the plugin is installed.
+
+#### Automatic tmux start
+
+Tmux is automatically started after the computer/server is turned on.
+
+Put `set -g @resurrect-auto-tmux-start 'on'` in `tmux.conf` to enable this.
 
 #### Automatic restore
 
-Last saved environment is automatically restored when tmux server is started.
+Last saved environment is automatically restored when tmux is started.
+
 Put `set -g @resurrect-auto-restore 'on'` in `tmux.conf` to enable this.
 
 Note: automatic restore happens **exclusively** on tmux server start. No other

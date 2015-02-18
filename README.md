@@ -21,7 +21,8 @@ This action starts automatically when the plugin is installed.
 
 Tmux is automatically started after the computer/server is turned on.
 
-Put `set -g @resurrect-auto-tmux-start 'on'` in `tmux.conf` to enable this.
+See the [instructions](scripts/handle_tmux_automatic_start/README.md) how to
+enable this for your system.
 
 #### Automatic restore
 

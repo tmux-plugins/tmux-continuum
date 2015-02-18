@@ -7,6 +7,14 @@ source "$CURRENT_DIR/../variables.sh"
 
 template() {
 	local tmux_start_script="$1"
+	local is_fullscreen="$2"
+
+	local fullscreen_tag=""
+	if [ "$is_fullscreen" == "true" ]; then
+		# newline and spacing so tag is aligned with other tags in template
+		fullscreen_tag=$'\n        <string>fullscreen</string>'
+	fi
+
 	local content
 	read -r -d '' content <<-EOF
 	<?xml version="1.0" encoding="UTF-8"?>
@@ -17,7 +25,7 @@ template() {
 	    <string>${osx_auto_start_file_name}</string>
 	    <key>ProgramArguments</key>
 	    <array>
-	        <string>${tmux_start_script}</string>
+	        <string>${tmux_start_script}</string>$fullscreen_tag
 	    </array>
 	    <key>RunAtLoad</key>
 	    <true/>
@@ -40,10 +48,9 @@ get_iterm_or_teminal_option_value() {
 get_fullscreen_option_value() {
 	local options="$1"
 	if [[ "$options" =~ "fullscreen" ]]; then
-		# space prepended bc this will be a script argument
-		echo " fullscreen"
+		echo "true"
 	else
-		echo ""
+		echo "false"
 	fi
 }
 
@@ -51,8 +58,9 @@ main() {
 	local options="$(get_tmux_option "$auto_start_config_option" "$auto_start_config_default")"
 	local iterm_or_terminal_value="$(get_iterm_or_teminal_option_value "$options")"
 	local fullscreen_option_value="$(get_fullscreen_option_value "$options")"
+	local tmux_start_script_path="${CURRENT_DIR}/osx_${iterm_or_terminal_value}_start_tmux.sh"
 
-	local launchd_plist_file_content="$(template "${CURRENT_DIR}/osx_${iterm_or_terminal_value}_start_tmux.sh${fullscreen_option_value}")"
+	local launchd_plist_file_content="$(template "$tmux_start_script_path" "$fullscreen_option_value")"
 	echo "$launchd_plist_file_content" > "$osx_auto_start_file_path"
 }
 main

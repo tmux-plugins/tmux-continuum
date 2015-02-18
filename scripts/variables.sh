@@ -19,5 +19,9 @@ auto_restore_halt_file="${HOME}/tmux_no_auto_restore"
 auto_start_option="@resurrect-auto-tmux-start"
 auto_start_default="off"
 
+# comma separated list of additional options for tmux auto start
+auto_start_config_option="@resurrect-auto-tmux-start-options"
+auto_start_config_default=""
+
 osx_auto_start_file_name="Tmux.Start.plist"
 osx_auto_start_file_path="${HOME}/Library/LaunchAgents/${osx_auto_start_file_name}"

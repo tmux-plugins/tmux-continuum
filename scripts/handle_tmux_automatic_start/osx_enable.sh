@@ -2,6 +2,7 @@
 
 CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+source "$CURRENT_DIR/../helpers.sh"
 source "$CURRENT_DIR/../variables.sh"
 
 template() {
@@ -26,8 +27,32 @@ template() {
 	echo "$content"
 }
 
+get_iterm_or_teminal_option_value() {
+	local options="$1"
+	if [[ "$options" =~ "iterm" ]]; then
+		echo "iterm"
+	else
+		# Terminal.app is the default console app
+		echo "terminal"
+	fi
+}
+
+get_fullscreen_option_value() {
+	local options="$1"
+	if [[ "$options" =~ "fullscreen" ]]; then
+		# space prepended bc this will be a script argument
+		echo " fullscreen"
+	else
+		echo ""
+	fi
+}
+
 main() {
-	local launchd_plist_file_content="$(template "$CURRENT_DIR/osx_terminal_start_tmux.sh")"
+	local options="$(get_tmux_option "$auto_start_config_option" "$auto_start_config_default")"
+	local iterm_or_terminal_value="$(get_iterm_or_teminal_option_value "$options")"
+	local fullscreen_option_value="$(get_fullscreen_option_value "$options")"
+
+	local launchd_plist_file_content="$(template "${CURRENT_DIR}/osx_${iterm_or_terminal_value}_start_tmux.sh${fullscreen_option_value}")"
 	echo "$launchd_plist_file_content" > "$osx_auto_start_file_path"
 }
 main

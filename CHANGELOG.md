@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v2.1.0, 2015-02-18
 - enable "tmux auto start" for OS X
 - enable customizing "tmux auto start" for OS X
 - fix errors when creating a launchd plist file for auto-start on OS X

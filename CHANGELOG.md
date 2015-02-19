@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- bugfixes for 'tmux auto start' OS X Terminal.app and iTerm scripts
 
 ### v2.1.0, 2015-02-18
 - enable "tmux auto start" for OS X

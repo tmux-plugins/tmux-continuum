@@ -6,7 +6,7 @@ Tmux is automatically started after the computer/server is turned on.
 
 To enable this feature:
 - put `set -g @resurrect-auto-tmux-start 'on'` in `tmux.conf`
-- reload `tmux.conf`
+- reload tmux config with this shell command: `tmux source-file ~/.tmux.conf`
 
 Next time the computer is started:
 - `Terminal.app` window will open and resize to maximum size

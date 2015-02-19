@@ -5,7 +5,7 @@ CURRENT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 source "$CURRENT_DIR/helpers.sh"
 source "$CURRENT_DIR/variables.sh"
 
-auto_restore_not_disabled() {
+auto_restore_enabled() {
 	local auto_restore_value="$(get_tmux_option "$auto_restore_option" "$auto_restore_default")"
 	[ "$auto_restore_value" == "on" ] && [ ! -f "$auto_restore_halt_file" ]
 }
@@ -20,7 +20,7 @@ fetch_and_run_tmux_resurrect_restore_script() {
 }
 
 main() {
-	if auto_restore_not_disabled; then
+	if auto_restore_enabled; then
 		fetch_and_run_tmux_resurrect_restore_script
 	fi
 }

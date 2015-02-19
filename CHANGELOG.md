@@ -4,6 +4,8 @@
 - do not auto-restore tmux environment if another tmux server is already running
   (we don't want to duplicate stuff)
 - bugfixes for 'tmux auto start' OS X Terminal.app and iTerm scripts
+- prevent saving for the first 15 minutes only when plugin is sourced the first
+  time (not on subsequent sources or tmux.conf reloads)
 
 ### v2.1.0, 2015-02-18
 - enable "tmux auto start" for OS X

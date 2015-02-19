@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+- do not auto-restore tmux environment if another tmux server is already running
+  (we don't want to duplicate stuff)
 - bugfixes for 'tmux auto start' OS X Terminal.app and iTerm scripts
 
 ### v2.1.0, 2015-02-18

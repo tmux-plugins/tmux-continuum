@@ -10,6 +10,33 @@ auto_restore_enabled() {
 	[ "$auto_restore_value" == "on" ] && [ ! -f "$auto_restore_halt_file" ]
 }
 
+current_tmux_server_pid() {
+	echo "$TMUX" |
+		cut -f2 -d","
+}
+
+all_tmux_processes() {
+	ps -Ao "command pid" |
+		\grep "^tmux"
+}
+
+tmux_processes_except_current_server() {
+	all_tmux_processes |
+		\grep -v " $(current_tmux_server_pid)$"
+}
+
+number_tmux_processes_except_current_server() {
+	all_tmux_processes |
+		\grep -v " $(current_tmux_server_pid)$" |
+		wc -l |
+		sed "s/ //g"
+}
+
+another_tmux_server_running() {
+	# there are 2 tmux processes (current tmux server + 1) on tmux startup
+	[ "$(number_tmux_processes_except_current_server)" -gt 1 ]
+}
+
 fetch_and_run_tmux_resurrect_restore_script() {
 	# give tmux some time to start and source all the plugins
 	sleep 1
@@ -20,7 +47,7 @@ fetch_and_run_tmux_resurrect_restore_script() {
 }
 
 main() {
-	if auto_restore_enabled; then
+	if auto_restore_enabled && ! another_tmux_server_running; then
 		fetch_and_run_tmux_resurrect_restore_script
 	fi
 }

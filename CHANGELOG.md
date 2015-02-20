@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- document tmux multi-server behavior in the readme
 - do not auto-restore tmux environment if another tmux server is already running
   (we don't want to duplicate stuff)
 - bugfixes for 'tmux auto start' OS X Terminal.app and iTerm scripts

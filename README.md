@@ -3,12 +3,12 @@
 Features:
 
 - continuous saving of tmux environment
-- automatic tmux start when computer/server is on
+- automatic tmux start when computer/server is turned on
 - automatic restore when tmux is started
 
-These features enable uninterrupted tmux usage. No matter the computer or server
-restarts, if the machine is on, tmux will be there how you left it off the last
-time it was used.
+Together these features enable uninterrupted tmux usage. No matter the computer
+or server restarts, if the machine is on, tmux will be there how you left it off
+the last time it was used.
 
 #### Continuous saving
 
@@ -114,7 +114,7 @@ The interval is always measured in minutes. So setting the interval to `60`
     set -g @resurrect-auto-save-interval '60'
 
 and then source `tmux.conf` by executing this command in the shell
-`tmux source ~/.tmux.conf`.
+`$ tmux source-file ~/.tmux.conf`.
 
 > How do I stop automatic saving?
 
@@ -123,7 +123,7 @@ Just set the save interval to `0`. Put this in `.tmux.conf`
     set -g @resurrect-auto-save-interval '0'
 
 and then source `tmux.conf` by executing this command in the shell
-`tmux source ~/.tmux.conf`.
+`$ tmux source-file ~/.tmux.conf`.
 
 > I had automatic restore turned on, how do I disable it now?
 
@@ -131,8 +131,29 @@ Just remove `set -g @resurrect-auto-restore 'on'` from `tmux.conf`.
 
 To be absolutely sure automatic restore doesn't happen, create a
 `tmux_no_auto_restore` file in your home directory (command:
-`touch ~/tmux_no_auto_restore`). Automatic restore won't happen if this file
+`$ touch ~/tmux_no_auto_restore`). Automatic restore won't happen if this file
 exists.
+
+### Behavior when running multiple tmux servers
+
+(This is safe to skip if you're always running a single tmux server.)
+
+If you're an advanced tmux user, you might be running multiple tmux servers at
+the same time. Maybe you start the first tmux server with `$ tmux` and then
+later another one with e.g. `$ tmux -S/tmp/foo`.
+
+You probably don't want to "auto restore" the same environment in the second
+tmux that uses `/tmp/foo` socket. You also probably don't want two tmux
+environments both having "auto save" feature on (think about overwrites).
+
+This plugin handles multi-server scenario by giving precedence to the tmux
+server that was first started.
+
+In the above example, the server started with `$ tmux` will do "auto
+restore" (if enabled) and will start "auto saving".
+"Auto restore" or "auto saving" **will not** happen for the second server that
+was started later with the `$ tmux -S/tmp/foo` command. The plugin will
+detect the presence of another server (`$ tmux`) and give it precedence.
 
 ### Other goodies
 

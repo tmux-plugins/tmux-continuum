@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v2.2.0, 2015-02-20
 - document tmux multi-server behavior in the readme
 - do not auto-restore tmux environment if another tmux server is already running
   (we don't want to duplicate stuff)

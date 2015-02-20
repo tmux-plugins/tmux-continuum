@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v3.0.0, 2015-02-20
 - rename the plugin from `tmux-resurrect-auto` to `tmux-continuum`
 
 ### v2.2.0, 2015-02-20

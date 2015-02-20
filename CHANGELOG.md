@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- rename the plugin from `tmux-resurrect-auto` to `tmux-continuum`
 
 ### v2.2.0, 2015-02-20
 - document tmux multi-server behavior in the readme

@@ -6,7 +6,7 @@ source "$CURRENT_DIR/scripts/helpers.sh"
 source "$CURRENT_DIR/scripts/variables.sh"
 source "$CURRENT_DIR/scripts/shared.sh"
 
-save_command_interpolation="#($CURRENT_DIR/scripts/resurrect_auto_save.sh)"
+save_command_interpolation="#($CURRENT_DIR/scripts/continuum_save.sh)"
 
 supported_tmux_version_ok() {
 	$CURRENT_DIR/scripts/check_tmux_version.sh "$SUPPORTED_VERSION"
@@ -49,7 +49,7 @@ just_started_tmux_server() {
 }
 
 start_auto_restore_in_background() {
-	$CURRENT_DIR/scripts/resurrect_auto_restore.sh &
+	$CURRENT_DIR/scripts/continuum_restore.sh &
 }
 
 main() {

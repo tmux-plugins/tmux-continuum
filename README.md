@@ -1,4 +1,4 @@
-# tmux-resurrect-auto
+# tmux-continuum
 
 Features:
 
@@ -28,7 +28,7 @@ enable this for your system.
 
 Last saved environment is automatically restored when tmux is started.
 
-Put `set -g @resurrect-auto-restore 'on'` in `tmux.conf` to enable this.
+Put `set -g @continuum-restore 'on'` in `tmux.conf` to enable this.
 
 Note: automatic restore happens **exclusively** on tmux server start. No other
 action (e.g. sourcing `tmux.conf`) triggers this.
@@ -46,10 +46,10 @@ of Feb 2015).
 
 Add plugin to the list of TPM plugins in `.tmux.conf`:
 
-    set -g @tpm_plugins '                \
-      tmux-plugins/tpm                   \
-      tmux-plugins/tmux-resurrect        \
-      tmux-plugins/tmux-resurrect-auto   \
+    set -g @tpm_plugins '            \
+      tmux-plugins/tpm               \
+      tmux-plugins/tmux-resurrect    \
+      tmux-plugins/tmux-continuum    \
     '
 
 Hit `prefix + I` to fetch the plugin and source it. The plugin will
@@ -63,11 +63,11 @@ of Feb 2015).
 
 Clone the repo:
 
-    $ git clone https://github.com/tmux-plugins/tmux-resurrect-auto ~/clone/path
+    $ git clone https://github.com/tmux-plugins/tmux-continuum ~/clone/path
 
 Add this line to the bottom of `.tmux.conf`:
 
-    run-shell ~/clone/path/resurrect_auto.tmux
+    run-shell ~/clone/path/continuum.tmux
 
 Reload TMUX environment:
 
@@ -96,7 +96,7 @@ Here are the steps to restore to a previous point in time:
 - `$ cd ~/.tmux/resurrect/`
 - locate the save file you'd like to use for restore (file names have a timestamp)
 - symlink the `last` file to the desired save file: `$ ln -sf <file_name> last`
-- do a restore with `tmux-resurrect` binding: `prefix + Ctrl-r`
+- do a restore with `tmux-resurrect` key: `prefix + Ctrl-r`
 
 You should now be restored to the time when `<file_name>` save happened.
 
@@ -111,7 +111,7 @@ time to time.
 The interval is always measured in minutes. So setting the interval to `60`
 (minutes) will do the trick. Put this in `.tmux.conf`:
 
-    set -g @resurrect-auto-save-interval '60'
+    set -g @continuum-save-interval '60'
 
 and then source `tmux.conf` by executing this command in the shell
 `$ tmux source-file ~/.tmux.conf`.
@@ -120,14 +120,14 @@ and then source `tmux.conf` by executing this command in the shell
 
 Just set the save interval to `0`. Put this in `.tmux.conf`
 
-    set -g @resurrect-auto-save-interval '0'
+    set -g @continuum-save-interval '0'
 
 and then source `tmux.conf` by executing this command in the shell
 `$ tmux source-file ~/.tmux.conf`.
 
 > I had automatic restore turned on, how do I disable it now?
 
-Just remove `set -g @resurrect-auto-restore 'on'` from `tmux.conf`.
+Just remove `set -g @continuum-restore 'on'` from `tmux.conf`.
 
 To be absolutely sure automatic restore doesn't happen, create a
 `tmux_no_auto_restore` file in your home directory (command:

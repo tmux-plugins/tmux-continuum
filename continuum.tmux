@@ -9,11 +9,11 @@ source "$CURRENT_DIR/scripts/shared.sh"
 save_command_interpolation="#($CURRENT_DIR/scripts/continuum_save.sh)"
 
 supported_tmux_version_ok() {
-	$CURRENT_DIR/scripts/check_tmux_version.sh "$SUPPORTED_VERSION"
+	"$CURRENT_DIR/scripts/check_tmux_version.sh" "$SUPPORTED_VERSION"
 }
 
 handle_tmux_automatic_start() {
-	$CURRENT_DIR/scripts/handle_tmux_automatic_start.sh
+	"$CURRENT_DIR/scripts/handle_tmux_automatic_start.sh"
 }
 
 another_tmux_server_running() {
@@ -49,7 +49,7 @@ just_started_tmux_server() {
 }
 
 start_auto_restore_in_background() {
-	$CURRENT_DIR/scripts/continuum_restore.sh &
+	"$CURRENT_DIR/scripts/continuum_restore.sh" &
 }
 
 main() {

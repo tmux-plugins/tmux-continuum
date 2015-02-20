@@ -14,3 +14,33 @@ set_tmux_option() {
 	local value="$2"
 	tmux set-option -gq "$option" "$value"
 }
+
+# multiple tmux server detection helpers
+
+current_tmux_server_pid() {
+	echo "$TMUX" |
+		cut -f2 -d","
+}
+
+all_tmux_processes() {
+	ps -Ao "command pid" |
+		\grep "^tmux"
+}
+
+number_tmux_processes_except_current_server() {
+	all_tmux_processes |
+		\grep -v " $(current_tmux_server_pid)$" |
+		wc -l |
+		sed "s/ //g"
+}
+
+number_current_server_client_processes() {
+	tmux list-clients |
+		wc -l |
+		sed "s/ //g"
+}
+
+another_tmux_server_running_on_startup() {
+	# there are 2 tmux processes (current tmux server + 1) on tmux startup
+	[ "$(number_tmux_processes_except_current_server)" -gt 1 ]
+}

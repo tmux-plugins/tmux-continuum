@@ -34,8 +34,11 @@ delay_saving_environment_on_first_plugin_load() {
 
 add_resurrect_save_interpolation() {
 	local status_right_value="$(get_tmux_option "status-right" "")"
-	local new_value="${save_command_interpolation}${status_right_value}"
-	set_tmux_option "status-right" "$new_value"
+	# check interpolation not already added
+	if ! [[ "$status_right_value" == *"$save_command_interpolation"* ]]; then
+		local new_value="${save_command_interpolation}${status_right_value}"
+		set_tmux_option "status-right" "$new_value"
+	fi
 }
 
 # on tmux server start, when tmux.conf is sourced there are no sessions and

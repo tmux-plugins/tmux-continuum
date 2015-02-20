@@ -2,6 +2,7 @@
 
 ### master
 - properly quote scripts
+- bugfix: "auto restore" feature does not work on tmux `1.9a`
 
 ### v3.0.0, 2015-02-20
 - rename the plugin from `tmux-resurrect-auto` to `tmux-continuum`

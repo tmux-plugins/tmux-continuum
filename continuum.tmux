@@ -41,11 +41,15 @@ add_resurrect_save_interpolation() {
 	fi
 }
 
-# on tmux server start, when tmux.conf is sourced there are no sessions and
-# `tmux has` reports 1
+number_of_sessions() {
+	tmux list-sessions |
+		wc -l |
+		sed "s/ //g"
+}
+
+# when tmux server is first started, number of sessions is 0
 just_started_tmux_server() {
-	tmux has
-	[ $? -eq 1 ]
+	[ "$(number_of_sessions)" -eq 0 ]
 }
 
 start_auto_restore_in_background() {

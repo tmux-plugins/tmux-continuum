@@ -164,6 +164,9 @@ detect the presence of another server (`$ tmux`) and give it precedence.
 - [tmux-open](https://github.com/tmux-plugins/tmux-open) - a plugin for quickly
   opening highlighted file or a url
 
+You might want to follow [@brunosutic](https://twitter.com/brunosutic) on
+twitter if you want to hear about new tmux plugins or feature updates.
+
 ### Reporting bugs and contributing
 
 Both contributing and bug reports are welcome. Please check out

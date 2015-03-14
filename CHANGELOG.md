@@ -3,6 +3,10 @@
 ### master
 - properly quote scripts
 - bugfix: "auto restore" feature does not work on tmux `1.9a`
+- bugfix: do not count `tmux source-file .tmux.conf` as a tmux process (when
+  checking if other tmux server is running). Previously, this caused
+  interpolation command not to be inserted into `status-right` because `tmux
+  source-file` was falsely detected as another tmux server.
 
 ### v3.0.0, 2015-02-20
 - rename the plugin from `tmux-resurrect-auto` to `tmux-continuum`

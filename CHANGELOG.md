@@ -1,6 +1,8 @@
 # Changelog
 
 ### master
+
+### v3.1.0, 2015-03-14
 - properly quote scripts
 - bugfix: "auto restore" feature does not work on tmux `1.9a`
 - bugfix: do not count `tmux source-file .tmux.conf` as a tmux process (when

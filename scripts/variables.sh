@@ -13,6 +13,9 @@ last_auto_save_option="@continuum-save-last-timestamp"
 auto_restore_option="@continuum-restore"
 auto_restore_default="off"
 
+auto_kill_default_option="@continuum-kill-default"
+auto_kill_default_default="off"
+
 auto_restore_halt_file="${HOME}/tmux_no_auto_restore"
 
 # tmux auto start options

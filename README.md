@@ -53,11 +53,8 @@ of Feb 2015).
 
 Add plugin to the list of TPM plugins in `.tmux.conf`:
 
-    set -g @tpm_plugins '            \
-      tmux-plugins/tpm               \
-      tmux-plugins/tmux-resurrect    \
-      tmux-plugins/tmux-continuum    \
-    '
+    set -g @plugin 'tmux-plugins/tmux-resurrect'
+    set -g @plugin 'tmux-plugins/tmux-continuum'
 
 Hit `prefix + I` to fetch the plugin and source it. The plugin will
 automatically start "working" in the background, no action required.

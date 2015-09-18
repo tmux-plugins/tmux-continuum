@@ -23,4 +23,11 @@ Config options:
 
 ### Linux
 
-Help with this would be greatly appreciated. Please get in touch.
+To enable this feature:
+- put `set -g @continuum-boot 'on'` in `tmux.conf`
+- reload tmux config with this shell command: `$ tmux source-file ~/.tmux.conf`
+
+Next time the computer is started:
+- `x-terminal-emulator` window will open
+- `tmux` command will be executed in the terminal window
+- if "auto restore" feature is enabled, tmux will start restoring previous env

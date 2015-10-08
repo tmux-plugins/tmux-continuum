@@ -21,8 +21,8 @@ This action starts automatically when the plugin is installed.
 
 Tmux is automatically started after the computer/server is turned on.
 
-See the [instructions](scripts/handle_tmux_automatic_start/README.md) how to
-enable this for your system.
+See the [instructions](docs/automatic_start.md) how to enable this for your
+system.
 
 #### Automatic restore
 
@@ -75,6 +75,7 @@ required.
 - [behavior when running multiple tmux servers](docs/multiple_tmux_servers.md) -
   this doc is safe to skip, but you might want to read it if you're using tmux
   with `-L` or `-S` flags
+- [automatically start tmux after the computer is turned on](docs/automatic_start.md)
 
 ### Other goodies
 

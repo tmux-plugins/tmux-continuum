@@ -10,6 +10,8 @@ Together these features enable uninterrupted tmux usage. No matter the computer
 or server restarts, if the machine is on, tmux will be there how you left it off
 the last time it was used.
 
+Tested and working on Linux, OSX and Cygwin.
+
 #### Continuous saving
 
 Tmux environment will be saved at the interval of 15 minutes. All the saving

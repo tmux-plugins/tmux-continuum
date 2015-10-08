@@ -72,7 +72,7 @@ required.
 ### Docs
 
 - [frequently asked questions](docs/faq.md)
-- [behavior when running multiple tmux servers](docs/multiple_tmux_servers.md)
+- [behavior when running multiple tmux servers](docs/multiple_tmux_servers.md) -
   this doc is safe to skip, but you might want to read it if you're using tmux
   with `-L` or `-S` flags
 

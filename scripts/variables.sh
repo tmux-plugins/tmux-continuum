@@ -28,3 +28,6 @@ osx_auto_start_file_path="${HOME}/Library/LaunchAgents/${osx_auto_start_file_nam
 
 systemd_service_name="tmux.service"
 systemd_unit_file_path="$HOME/.config/systemd/user/${systemd_service_name}"
+
+systemd_tmux_server_start_cmd_option="@systemd_tmux_server_start_cmd"
+systemd_tmux_server_start_cmd_default="start-server"

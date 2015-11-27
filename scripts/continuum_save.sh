@@ -34,9 +34,19 @@ fetch_and_run_tmux_resurrect_save_script() {
 	fi
 }
 
+delete_old_saves() {
+	ls ${HOME}/.tmux/resurrect/* -1dtr | head -n -10 | xargs -d '\n' rm -f
+}
+
 main() {
 	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
 		fetch_and_run_tmux_resurrect_save_script
+	fi
+	
+	# if user has enabled @continuum-delete-old-saves-option 'on'
+	if [ -n $(get_tmux_option "$delete_old_saves_option" "") ]
+	then
+		delete_old_saves
 	fi
 }
 main

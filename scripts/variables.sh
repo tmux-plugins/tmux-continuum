@@ -25,3 +25,10 @@ auto_start_config_default=""
 
 osx_auto_start_file_name="Tmux.Start.plist"
 osx_auto_start_file_path="${HOME}/Library/LaunchAgents/${osx_auto_start_file_name}"
+
+status_interpolation_string="\#{continuum_status}"
+status_script="#($CURRENT_DIR/scripts/continuum_status.sh)"
+# below options set style/color for #{continuum_status} interpolation
+status_on_style_wrap_option="@continuum-status-on-wrap-style"   # example value: "#[fg=green]#{value}#[fg=white]"
+status_off_style_wrap_option="@continuum-status-off-wrap-style" # example value: "#[fg=yellow,bold]#{value}#[fg=white,nobold]"
+status_wrap_string="\#{value}"

@@ -9,6 +9,7 @@
   checking if other tmux server is running). Previously, this caused
   interpolation command not to be inserted into `status-right` because `tmux
   source-file` was falsely detected as another tmux server.
+- add `#{continuum_status}` status line interpolation
 
 ### v3.0.0, 2015-02-20
 - rename the plugin from `tmux-resurrect-auto` to `tmux-continuum`

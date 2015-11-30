@@ -37,4 +37,4 @@ systemd_service_name="tmux.service"
 systemd_unit_file_path="$HOME/.config/systemd/user/${systemd_service_name}"
 
 systemd_tmux_server_start_cmd_option="@systemd_tmux_server_start_cmd"
-systemd_tmux_server_start_cmd_default="new-session"
+systemd_tmux_server_start_cmd_default="new-session -d"

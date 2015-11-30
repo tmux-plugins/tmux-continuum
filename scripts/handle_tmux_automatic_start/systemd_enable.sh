@@ -19,14 +19,15 @@ template() {
 	Documentation=man:tmux(1)
 
 	[Service]
-	Type=oneshot
-	RemainAfterExit=True
+	Type=forking
 	Environment=DISPLAY=:0
 	ExecStart=/usr/bin/tmux ${systemd_tmux_server_start_cmd}
 
 	ExecStop=/home/peteches/.tmux/plugins/tmux-resurrect/scripts/save.sh
 	ExecStop=/usr/bin/tmux kill-server
 	KillMode=none
+
+	RestartSec=2
 
 	[Install]
 	WantedBy=default.target

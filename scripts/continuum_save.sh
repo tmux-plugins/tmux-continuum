@@ -49,8 +49,8 @@ main() {
 	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
 		fetch_and_run_tmux_resurrect_save_script
 		
-		# if user has enabled @continuum-delete-old-saves-option 'on'
-		if [ -n $(get_tmux_option "$delete_old_saves_option" "") ]
+		local keeping_old_saves=$(get_tmux_option "$keep_old_saves_option" "")
+		if [ -z "$keeping_old_saves" ]
 		then
 			delete_old_saves
 		fi

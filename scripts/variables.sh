@@ -6,7 +6,7 @@ resurrect_restore_path_option="@resurrect-restore-script-path"
 
 auto_save_interval_option="@continuum-save-interval"
 auto_save_interval_default="15"
-delete_old_saves_option="@continuum-delete-old-saves-option"
+keep_old_saves_option="@continuum-keep-old-saves-option"
 
 # time when the tmux environment was last saved (unix timestamp)
 last_auto_save_option="@continuum-save-last-timestamp"

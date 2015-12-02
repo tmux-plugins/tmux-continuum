@@ -1,3 +1,8 @@
+# these variables should possibly be in scripts/variables.sh
+# but are currently here for consistency with tmux-resurrect
+default_resurrect_dir="$HOME/.tmux/resurrect"
+resurrect_dir_option="@resurrect-dir"
+
 get_tmux_option() {
 	local option="$1"
 	local default_value="$2"

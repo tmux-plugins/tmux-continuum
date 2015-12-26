@@ -78,6 +78,7 @@ required.
   this doc is safe to skip, but you might want to read it if you're using tmux
   with `-L` or `-S` flags
 - [automatically start tmux after the computer is turned on](docs/automatic_start.md)
+- [continuum status in tmux status line](docs/continuum_status.md)
 
 ### Other goodies
 

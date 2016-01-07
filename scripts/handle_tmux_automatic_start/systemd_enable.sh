@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-set -x
-
 CURRENT_DIR="$( dirname ${BASH_SOURCE[0]} )"
 
 source "$CURRENT_DIR/../helpers.sh"

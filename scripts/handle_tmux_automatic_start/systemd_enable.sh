@@ -21,7 +21,7 @@ template() {
 	Environment=DISPLAY=:0
 	ExecStart=/usr/bin/tmux ${systemd_tmux_server_start_cmd}
 
-	ExecStop=/home/peteches/.tmux/plugins/tmux-resurrect/scripts/save.sh
+	ExecStop=${HOME}/.tmux/plugins/tmux-resurrect/scripts/save.sh
 	ExecStop=/usr/bin/tmux kill-server
 	KillMode=none
 

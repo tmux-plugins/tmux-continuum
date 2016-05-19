@@ -49,6 +49,9 @@ main() {
 	local systemd_tmux_server_start_cmd="$(get_tmux_option "${systemd_tmux_server_start_cmd_option}" "${systemd_tmux_server_start_cmd_default}" )"
 	local tmux_start_script_path="${CURRENT_DIR}/linux_start_tmux.sh"
 	local systemd_unit_file=$(template "${tmux_start_script_path}" "${options}")
+	if [[ ! -d $( dirname $systemd_unit_file_path ) ]]; then
+		mkdir -p $(dirname $systemd_unit_file_path)
+	fi
 	echo "$systemd_unit_file" > "${systemd_unit_file_path}"
 	enable_tmux_unit_on_boot
 }

@@ -35,7 +35,7 @@ template() {
 }
 
 systemd_tmux_is_enabled() {
-	systemctl --user is_enabled $(basename "${systemd_unit_file_path}") >/dev/null 2>&1
+	systemctl --user is-enabled $(basename "${systemd_unit_file_path}") >/dev/null 2>&1
 }
 
 enable_tmux_unit_on_boot() {

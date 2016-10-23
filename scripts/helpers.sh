@@ -23,9 +23,11 @@ current_tmux_server_pid() {
 }
 
 all_tmux_processes() {
+	# search for "^tmux " cause there can be some other running scripts,
+	# whose name starts with "tmux" for eg "tmux-mem-cpu-load"
 	# ignores `tmux source-file .tmux.conf` command used to reload tmux.conf
 	ps -Ao "command pid" |
-		\grep "^tmux" |
+		\grep "^tmux " |
 		\grep -v "^tmux source"
 }
 

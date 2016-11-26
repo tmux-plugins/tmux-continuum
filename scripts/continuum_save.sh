@@ -34,9 +34,31 @@ fetch_and_run_tmux_resurrect_save_script() {
 	fi
 }
 
+output_current_continuum_status() {
+	save_int=$(get_tmux_option "$auto_save_interval_option" | sed  "s/[^0-9]*\([0-9]\+\).*/\1/")
+	status=""
+	if [ $save_int -eq 0 ]
+	then
+		status="#[fg=yellow]off#[fg=white]"
+	elif [ $save_int -gt 0 ]
+	then
+		status="#[fg=green,bold]"${save_int}"#[fg=white,nobold]"
+	else
+		status="#[fg=red]error#[fg=white]"
+	fi
+	local temp="#[fg=green,bold]"${save_int}"#[fg=white,nobold]"
+	echo " "${status}" "
+}
+
 main() {
 	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
 		fetch_and_run_tmux_resurrect_save_script
+	fi
+	
+	# if user has enabled show status option then insert into statusline
+	if [ -n $(get_tmux_option "$show_continuum_status_option" "") ]
+	then
+		output_current_continuum_status
 	fi
 }
 main

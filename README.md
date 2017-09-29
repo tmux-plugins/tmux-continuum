@@ -30,10 +30,10 @@ system.
 
 Last saved environment is automatically restored when tmux is started.
 
-Put `set -g @continuum-restore 'on'` in `tmux.conf` to enable this.
+Put `set -g @continuum-restore 'on'` in `.tmux.conf` to enable this.
 
 Note: automatic restore happens **exclusively** on tmux server start. No other
-action (e.g. sourcing `tmux.conf`) triggers this.
+action (e.g. sourcing `.tmux.conf`) triggers this.
 
 #### Dependencies
 

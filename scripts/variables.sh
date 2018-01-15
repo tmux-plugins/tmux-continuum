@@ -33,6 +33,9 @@ status_on_style_wrap_option="@continuum-status-on-wrap-style"   # example value:
 status_off_style_wrap_option="@continuum-status-off-wrap-style" # example value: "#[fg=yellow,bold]#{value}#[fg=white,nobold]"
 status_wrap_string="\#{value}"
 
+countdown_interpolation_string="\#{continuum_countdown}"
+countdown_script="#($CURRENT_DIR/scripts/continuum_countdown.sh)"
+
 systemd_service_name="tmux.service"
 systemd_unit_file_path="$HOME/.config/systemd/user/${systemd_service_name}"
 

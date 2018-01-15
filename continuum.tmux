@@ -62,8 +62,9 @@ update_tmux_option() {
 	local option="$1"
 	local option_value="$(get_tmux_option "$option")"
 	# replace interpolation string with a script to execute
-	local new_option_value="${option_value/$status_interpolation_string/$status_script}"
-	set_tmux_option "$option" "$new_option_value"
+	option_value="${option_value/$status_interpolation_string/$status_script}"
+	option_value="${option_value/$countdown_interpolation_string/$countdown_script}"
+	set_tmux_option "$option" "$option_value"
 }
 
 main() {

@@ -79,6 +79,7 @@ required.
   with `-L` or `-S` flags
 - [automatically start tmux after the computer is turned on](docs/automatic_start.md)
 - [continuum status in tmux status line](docs/continuum_status.md)
+- [continuum countdown in tmux status line](docs/continuum_countdown.md)
 
 ### Other goodies
 

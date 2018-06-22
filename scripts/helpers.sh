@@ -27,8 +27,7 @@ all_tmux_processes() {
   # 1) `tmux source-file .tmux.conf` (used to reload tmux.conf)
   # 2) `tmux a` (which shows an additional process)
 
-  ps -Ao "command pid uid" |\
-    grep $UID |\
+  ps -u $UID -o "command pid uid" |\
     grep -E '^tmux' |\
     grep -vE '^tmux\s+(a|source)'
 }

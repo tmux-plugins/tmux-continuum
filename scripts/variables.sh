@@ -1,5 +1,9 @@
 SUPPORTED_VERSION="1.9"
 
+log_path="@continuum-log-path"
+log_path_default="${HOME}/tmux-continuum.log"
+debug="@continuum-debug"
+
 # these tmux options contain paths to tmux resurrect save and restore scripts
 resurrect_save_path_option="@resurrect-save-script-path"
 resurrect_restore_path_option="@resurrect-restore-script-path"

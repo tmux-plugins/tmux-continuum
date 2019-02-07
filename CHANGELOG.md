@@ -1,6 +1,7 @@
 # Changelog
 
 ### master
+- bugfix: "auto restore" feature stopped working
 
 ### v3.1.0, 2015-03-14
 - properly quote scripts

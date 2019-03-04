@@ -44,7 +44,9 @@ add_resurrect_save_interpolation() {
 }
 
 just_started_tmux_server() {
-	[ "$(tmux display-message -p -F '#{start_time}')" -gt "$(($(date +%s)-10))" ]
+	local tmux_start_time
+	tmux_start_time="$(tmux display-message -p -F '#{start_time}')"
+	[ "$tmux_start_time" == "" ] || [ "$tmux_start_time" -gt "$(($(date +%s)-10))" ]
 }
 
 start_auto_restore_in_background() {

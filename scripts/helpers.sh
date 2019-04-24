@@ -23,10 +23,13 @@ current_tmux_server_pid() {
 }
 
 all_tmux_processes() {
-	# ignores `tmux source-file .tmux.conf` command used to reload tmux.conf
-	ps -Ao "command pid" |
-		\grep "^tmux" |
-		\grep -v "^tmux source"
+	# finds all tmux processes for the current user ignoring the following:
+  # 1) `tmux source-file .tmux.conf` (used to reload tmux.conf)
+  # 2) `tmux a` (which shows an additional process)
+
+  ps -u $UID -o "command pid uid" |\
+    grep -E '^tmux' |\
+    grep -vE '^tmux\s+(a|source)'
 }
 
 number_tmux_processes_except_current_server() {

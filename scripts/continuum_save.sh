@@ -34,9 +34,26 @@ fetch_and_run_tmux_resurrect_save_script() {
 	fi
 }
 
+resurrect_dir() {
+	local path="$(get_tmux_option "$resurrect_dir_option" "$default_resurrect_dir")"
+	echo "${path/#\~/$HOME}" # expands tilde if used with @resurrect-dir
+}
+
+delete_old_saves() {
+	# check if @resurrect-dir was set - if so use it
+	local resurrect_save_dir=$(resurrect_dir)
+	find $resurrect_save_dir -type f -mtime +7 -name "tmux_resurrect_*.txt" -exec rm -f {} +
+}
+
 main() {
 	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
 		fetch_and_run_tmux_resurrect_save_script
+		
+		local keeping_old_saves=$(get_tmux_option "$keep_old_saves_option" "")
+		if [ -z "$keeping_old_saves" ]
+		then
+			delete_old_saves
+		fi
 	fi
 }
 main

@@ -36,7 +36,9 @@ fetch_and_run_tmux_resurrect_save_script() {
 
 main() {
 	(
-		flock -n 101 || return  # The code below is not thread-safe.
+		# The code after "flock" is not thread-safe. A race condition can be triggered by multiple
+		# tmux clients performing autosave in parallel.
+		! command -v flock || flock -n 101 || return
 		if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
 			fetch_and_run_tmux_resurrect_save_script
 		fi

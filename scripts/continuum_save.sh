@@ -26,6 +26,12 @@ enough_time_since_last_run_passed() {
 	[ "$(current_timestamp)" -ge "$next_run" ]
 }
 
+first_client() {
+	local client_name="$(tmux display-message -p -F "#{client_name}")"
+	local first_client_name="$(tmux list-clients -F "#{client_name}" | head -n 1)"
+	[ "$client_name" == "$first_client_name" ]
+}
+
 fetch_and_run_tmux_resurrect_save_script() {
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "")"
 	if [ -n "$resurrect_save_script_path" ]; then
@@ -35,7 +41,7 @@ fetch_and_run_tmux_resurrect_save_script() {
 }
 
 main() {
-	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
+	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed && first_client; then
 		fetch_and_run_tmux_resurrect_save_script
 	fi
 }

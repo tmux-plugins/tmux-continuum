@@ -35,13 +35,20 @@ fetch_and_run_tmux_resurrect_save_script() {
 }
 
 main() {
-	(
-		# The code after "flock" is not thread-safe. A race condition can be triggered by multiple
-		# tmux clients performing autosave in parallel.
-		! command -v flock || flock -n 101 || return
-		if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
-			fetch_and_run_tmux_resurrect_save_script
+	# Sometimes tmux starts multiple saves in parallel. We want only one
+	# save to be running, otherwise we can get corrupted saved state.
+	# The following implements a lock that auto-expires after 100...200s.
+	local lockdir_prefix="/tmp/tmux-continuum-$(current_tmux_server_pid)-lock-"
+	local lockdir1="${lockdir_prefix}$[ `date +%s` / 100 ]"
+	local lockdir2="${lockdir_prefix}$[ `date +%s` / 100 + 1]"
+	if mkdir "$lockdir1"; then
+		trap "rmdir "$lockdir1"" EXIT
+		if mkdir "$lockdir2"; then
+			trap "rmdir "$lockdir1" "$lockdir2"" EXIT
+			if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed; then
+				fetch_and_run_tmux_resurrect_save_script
+			fi
 		fi
-	) 101>/tmp/tmux-continuum-autosave.lockfile
+	fi
 }
 main

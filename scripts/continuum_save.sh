@@ -37,10 +37,11 @@ fetch_and_run_tmux_resurrect_save_script() {
 main() {
 	# Sometimes tmux starts multiple saves in parallel. We want only one
 	# save to be running, otherwise we can get corrupted saved state.
-	# The following implements a lock that auto-expires after 100...200s.
 	local lockdir_prefix="/tmp/tmux-continuum-$(current_tmux_server_pid)-lock-"
-	local lockdir1="${lockdir_prefix}$[ `date +%s` / 100 ]"
-	local lockdir2="${lockdir_prefix}$[ `date +%s` / 100 + 1]"
+	# The following implements a lock that auto-expires after 100...200s.
+	local lock_generation=$[ `date +%s` / 100 ]
+	local lockdir1="${lockdir_prefix}${lock_generation}"
+	local lockdir2="${lockdir_prefix}$[ $lock_generation + 1 ]"
 	if mkdir "$lockdir1"; then
 		trap "rmdir "$lockdir1"" EXIT
 		if mkdir "$lockdir2"; then

@@ -10,4 +10,12 @@ To control the tmux service you can use all the standard `systemctl` commands us
 
   systemctl --user status tmux.service
 
+## Note about environment variables (and desktop environments)
 
+tmux boots relatively early after login, and environment variables such as `DESKTOP_SESSION` are not available. A workaround for this is to allow this script to create the systemd unit as normal, and then disable it (meaning automatic start) with (`systemctl --user disable tmux.service`). After disabling it, add a line to `~/.xprofile` (create the file if it does not exist) with:
+
+```
+systemctl --user start tmux
+```
+
+This will achieve the same result, but the environment variables from the desktop environment should also be present.

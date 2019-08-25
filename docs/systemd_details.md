@@ -18,4 +18,6 @@ tmux boots relatively early after login, and environment variables such as `DESK
 systemctl --user start tmux
 ```
 
+Be sure to also remove the `set -g @continuum-boot 'on'` from your .tmux.conf. Otherwise, tmux-continuum will re-enable the service, and it will start before `~/.xprofile` is sourced.
+
 This will achieve the same result, but the environment variables from the desktop environment should also be present.

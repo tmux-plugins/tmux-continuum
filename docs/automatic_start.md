@@ -16,10 +16,19 @@ Next time the computer is started:
 Config options:
 - `set -g @continuum-boot-options 'fullscreen'` - terminal window
   will go fullscreen
-- `set -g @continuum-boot-options 'iterm'` - start `iTerm` instead
+- `set -g @continuum-boot-options 'iterm'` - start [iTerm](https://www.iterm2.com) instead
   of `Terminal.app`
 - `set -g @continuum-boot-options 'iterm,fullscreen'` - start `iTerm`
   in fullscreen
+- `set -g @continuum-boot-options 'kitty'` - start [kitty](https://sw.kovidgoyal.net/kitty) instead
+  of `Terminal.app`
+- `set -g @continuum-boot-options 'kitty,fullscreen'` - start `kitty`
+  in fullscreen
+
+Note: The first time you reboot your machine and activate this feature you may be prompted about a script requiring
+access to a system program (i.e. - System Events). If this happens tmux will not start automatically and you will need
+to go to `System Preferences -> Security & Privacy -> Accessability` and add the script to the list of apps that are
+allowed to control your computer.
 
 ### Linux
 

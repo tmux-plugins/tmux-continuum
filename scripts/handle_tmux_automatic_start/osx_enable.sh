@@ -35,7 +35,7 @@ template() {
 	echo "$content"
 }
 
-get_iterm_or_teminal_option_value() {
+get_strategy() {
 	local options="$1"
 	if [[ "$options" =~ "iterm" ]]; then
 		echo "iterm"
@@ -58,9 +58,9 @@ get_fullscreen_option_value() {
 
 main() {
 	local options="$(get_tmux_option "$auto_start_config_option" "$auto_start_config_default")"
-	local iterm_or_terminal_value="$(get_iterm_or_teminal_option_value "$options")"
+	local strategy="$(get_strategy "$options")"
 	local fullscreen_option_value="$(get_fullscreen_option_value "$options")"
-	local tmux_start_script_path="${CURRENT_DIR}/osx_${iterm_or_terminal_value}_start_tmux.sh"
+	local tmux_start_script_path="${CURRENT_DIR}/osx_${strategy}_start_tmux.sh"
 
 	local launchd_plist_file_content="$(template "$tmux_start_script_path" "$fullscreen_option_value")"
 	echo "$launchd_plist_file_content" > "$osx_auto_start_file_path"

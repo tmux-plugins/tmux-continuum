@@ -23,9 +23,7 @@ You should now be restored to the time when `<file_name>` save happened.
 
 > Will this plugin fill my hard disk?
 
-Most likely no. A regular save file is in the range of 5Kb. That said, it
-would be good to clean out old save files from `~/.tmux/resurrect/` dir from
-time to time.
+Most likely no. A regular save file is in the range of 5Kb. And `tmux-resurrect` already has a `remove_old_backups()` routine that will ["remove resurrect files older than 30 days, but keep at least 5 copies of backup."](https://github.com/tmux-plugins/tmux-resurrect/blob/da1a7558024b8552f7262b39ed22e3d679304f99/scripts/save.sh#L271-L277)
 
 > How do I change the save interval to i.e. 1 hour?
 

@@ -6,7 +6,7 @@ Features:
 - automatic tmux start when computer/server is turned on
 - automatic restore when tmux is started
 
-Together these features enable uninterrupted tmux usage. No matter the computer
+Together, these features enable uninterrupted tmux usage. No matter the computer
 or server restarts, if the machine is on, tmux will be there how you left it off
 the last time it was used.
 
@@ -14,8 +14,8 @@ Tested and working on Linux, OSX and Cygwin.
 
 #### Continuous saving
 
-Tmux environment will be saved at the interval of 15 minutes. All the saving
-happens in the background without the impact to your workflow.
+Tmux environment will be saved at an interval of 15 minutes. All the saving
+happens in the background without impact to your workflow.
 
 This action starts automatically when the plugin is installed.
 
@@ -23,7 +23,7 @@ This action starts automatically when the plugin is installed.
 
 Tmux is automatically started after the computer/server is turned on.
 
-See the [instructions](docs/automatic_start.md) how to enable this for your
+See the [instructions](docs/automatic_start.md) on how to enable this for your
 system.
 
 #### Automatic restore

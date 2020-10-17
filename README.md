@@ -89,6 +89,10 @@ required.
 - [tmux-open](https://github.com/tmux-plugins/tmux-open) - a plugin for quickly
   opening highlighted file or a url
 
+### Known Issues
+
+- In order to be executed periodically, the plugin updates the `status-right` tmux variable. In case some plugin (usually themes) overwrites the `status-right` variable, the autosave feature stops working. To fix this issue, place the plugin last in the TPM plugins list. 
+
 ### Reporting bugs and contributing
 
 Both contributing and bug reports are welcome. Please check out

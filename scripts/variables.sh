@@ -38,4 +38,4 @@ systemd_unit_file_path="$HOME/.config/systemd/user/${systemd_service_name}"
 
 tmux_server_session_temporary="tmux-continuum-tmp"
 systemd_tmux_server_start_cmd_option="@continuum-systemd-start-cmd"
-systemd_tmux_server_start_cmd_default="new-session -d"
+systemd_tmux_server_start_cmd_default="new-session -d -s ${tmux_server_session_temporary}"

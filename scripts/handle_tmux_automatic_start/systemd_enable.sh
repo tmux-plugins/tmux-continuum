@@ -19,7 +19,7 @@ template() {
 	[Service]
 	Type=forking
 	Environment=DISPLAY=:0
-	ExecStart="${systemd_tmux_server_start_cmd_default}"
+	ExecStart=${systemd_tmux_server_start_cmd}
 
 	ExecStop=${HOME}/.tmux/plugins/tmux-resurrect/scripts/save.sh
 	ExecStop=/usr/bin/tmux kill-server
@@ -46,7 +46,11 @@ enable_tmux_unit_on_boot() {
 
 main() {
 	local options="$(get_tmux_option "$auto_start_config_option" "${auto_start_config_default}")"
-	local systemd_tmux_server_start_cmd="$(get_tmux_option "${systemd_tmux_server_start_cmd_option}" "${systemd_tmux_server_start_cmd_default}" )"
+	# start tmux with a temporary session
+	local systemd_tmux_server_start_cmd_default="/usr/bin/tmux $(get_tmux_option "${systemd_tmux_server_start_cmd_option}" "${systemd_tmux_server_start_cmd_default}" ) -s ${tmux_server_session_temporary}"
+	# adds sleep to give tmux some time to finish dettached subprocess  "fetch_and_run_tmux_resurrect_restore_script"
+	# and kills tmux temporary session
+	local systemd_tmux_server_start_cmd="${systemd_tmux_server_start_cmd_default} && sleep 2 && /usr/bin/tmux kill-session -t ${tmux_server_session_temporary}"
 	local tmux_start_script_path="${CURRENT_DIR}/linux_start_tmux.sh"
 	local systemd_unit_file=$(template "${tmux_start_script_path}" "${options}")
 	mkdir -p "$(dirname ${systemd_unit_file_path})"

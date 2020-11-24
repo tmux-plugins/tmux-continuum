@@ -24,7 +24,7 @@ template() {
 
 	ExecStop=${HOME}/.tmux/plugins/tmux-resurrect/scripts/save.sh
 	ExecStop=/usr/bin/tmux kill-server
-	KillMode=none
+	KillMode=mixed
 
 	RestartSec=2
 

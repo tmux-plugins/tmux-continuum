@@ -24,6 +24,9 @@ Config options:
   of `Terminal.app`
 - `set -g @continuum-boot-options 'kitty,fullscreen'` - start `kitty`
   in fullscreen
+- `set -g @continuum-boot-options 'alacritty'` - start [alacritty](https://github.com/alacritty/alacritty) instead of `Terminal.app`
+- `set -g @continuum-boot-options 'alacritty,fullscreen'` - start `alacritty`
+  in fullscreen
 
 Note: The first time you reboot your machine and activate this feature you may be prompted about a script requiring
 access to a system program (i.e. - System Events). If this happens tmux will not start automatically and you will need

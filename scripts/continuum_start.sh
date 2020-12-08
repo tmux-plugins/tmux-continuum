@@ -2,8 +2,6 @@
 
 CURRENT_DIR="$( dirname "$0" )"
 
-echo -e "\n$(date +%T) IN" >> /tmp/continuum
-
 source "$CURRENT_DIR/helpers.sh"
 source "$CURRENT_DIR/variables.sh"
 
@@ -16,12 +14,10 @@ clean_session() {
 	local sessions_count="$(tmux list-sessions 2>/dev/null | wc -l)"
 
 	if /usr/bin/tmux has-session -t "${tmux_server_session_temporary}"; then
-		# add a new session to preserve server daemon
-		[ "${sessions_count}" = 1 ] && tmux new-session -d && \
-			echo "$(date +%T) add session" >> /tmp/continuum
+		# add a new session to preserve server daemon when killing temporary session
+		[ "${sessions_count}" = 1 ] && tmux new-session
 
 		# kill session
-		echo "$(date +%T) kill session" >> /tmp/continuum
 		/usr/bin/tmux kill-session -t "${tmux_server_session_temporary}"
 	fi
 }

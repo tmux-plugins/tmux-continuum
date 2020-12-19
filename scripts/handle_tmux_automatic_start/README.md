@@ -1,1 +1,1 @@
-docs/automatic_start.md
+../../docs/automatic_start.md

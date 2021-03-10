@@ -66,5 +66,3 @@ main() {
 	fi
 }
 main
-
-resize_to_

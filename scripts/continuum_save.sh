@@ -51,7 +51,7 @@ enough_time_since_last_run_passed() {
 fetch_and_run_tmux_resurrect_save_script() {
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "")"
 	if [ -n "$resurrect_save_script_path" ]; then
-    if [ "$DEBUG" == "1" ]; then
+    if [ "$DEBUG" == "2" ]; then
       local log_path=$(get_log_path)
       log_message "Calling $resurrect_save_script_path"
 		  "$resurrect_save_script_path" >> $log_path 2>&1 &

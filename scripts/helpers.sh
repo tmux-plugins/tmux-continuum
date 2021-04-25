@@ -34,7 +34,7 @@ all_tmux_processes() {
 
 number_tmux_processes_except_current_server() {
 	all_tmux_processes |
-		\grep -v " $(current_tmux_server_pid)$" |
+		\grep -v " $(current_tmux_server_pid) " |
 		wc -l |
 		sed "s/ //g"
 }

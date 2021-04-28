@@ -10,6 +10,7 @@ template() {
 	shift
 	local options="$@"
 	local content=""
+	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "$(realpath ${CURRENT_DIR}/../../../tmux-resurrect/scripts/save.sh)")"
 
 	read -r -d '' content <<-EOF
 	[Unit]
@@ -21,7 +22,7 @@ template() {
 	Environment=DISPLAY=:0
 	ExecStart=/usr/bin/tmux ${systemd_tmux_server_start_cmd}
 
-	ExecStop=${HOME}/.tmux/plugins/tmux-resurrect/scripts/save.sh
+	ExecStop=${resurrect_save_script_path}
 	ExecStop=/usr/bin/tmux kill-server
 	KillMode=none
 

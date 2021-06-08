@@ -15,6 +15,9 @@ auto_restore_default="off"
 
 auto_restore_halt_file="${HOME}/tmux_no_auto_restore"
 
+auto_restore_max_delay_option="@continuum-restore-max-delay"
+auto_restore_max_delay_default="10"
+
 # tmux auto start options
 auto_start_option="@continuum-boot"
 auto_start_default="off"

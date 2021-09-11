@@ -17,7 +17,8 @@ Tested and working on Linux, OSX and Cygwin.
 Tmux environment will be saved at an interval of 15 minutes. All the saving
 happens in the background without impact to your workflow.
 
-This action starts automatically when the plugin is installed.
+This action starts automatically when the plugin is installed. Note it requires
+the status line to be `on` to run (since it uses a hook in status-right to run).
 
 #### Automatic tmux start
 

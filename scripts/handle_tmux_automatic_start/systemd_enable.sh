@@ -11,6 +11,7 @@ template() {
 	local options="$@"
 	local content=""
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "$(realpath ${CURRENT_DIR}/../../../tmux-resurrect/scripts/save.sh)")"
+	local tmux_path="$(which tmux)"
 
 	read -r -d '' content <<-EOF
 	[Unit]
@@ -20,10 +21,10 @@ template() {
 	[Service]
 	Type=forking
 	Environment=DISPLAY=:0
-	ExecStart=/usr/bin/tmux ${systemd_tmux_server_start_cmd}
+	ExecStart=${tmux_path} ${systemd_tmux_server_start_cmd}
 
 	ExecStop=${resurrect_save_script_path}
-	ExecStop=/usr/bin/tmux kill-server
+	ExecStop=${tmux_path} kill-server
 	KillMode=none
 
 	RestartSec=2

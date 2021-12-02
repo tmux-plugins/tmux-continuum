@@ -46,13 +46,27 @@ enable_tmux_unit_on_boot() {
 	fi
 }
 
-main() {
+systemd_unit_file() {
 	local options="$(get_tmux_option "$auto_start_config_option" "${auto_start_config_default}")"
 	local systemd_tmux_server_start_cmd="$(get_tmux_option "${systemd_tmux_server_start_cmd_option}" "${systemd_tmux_server_start_cmd_default}" )"
 	local tmux_start_script_path="${CURRENT_DIR}/linux_start_tmux.sh"
 	local systemd_unit_file=$(template "${tmux_start_script_path}" "${options}")
 	mkdir -p "$(dirname ${systemd_unit_file_path})"
-	echo "$systemd_unit_file" > "${systemd_unit_file_path}"
+	echo "$systemd_unit_file"
+}
+
+write_unit_file() {
+  systemd_unit_file > "${systemd_unit_file_path}"
+}
+
+write_unit_file_unless_exists() {
+	if ! [ -e "${systemd_unit_file_path}" ]; then
+    write_unit_file
+	fi
+}
+
+main() {
+  write_unit_file_unless_exists
 	enable_tmux_unit_on_boot
 }
 main

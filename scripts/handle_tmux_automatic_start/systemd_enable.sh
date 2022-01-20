@@ -56,6 +56,8 @@ systemd_unit_file() {
 }
 
 write_unit_file() {
+	# it never hurts to make sure the directory we are writing into exists
+	mkdir -p "${systemd_config_path}"
   systemd_unit_file > "${systemd_unit_file_path}"
 }
 

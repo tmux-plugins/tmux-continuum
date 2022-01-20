@@ -37,7 +37,8 @@ status_off_style_wrap_option="@continuum-status-off-wrap-style" # example value:
 status_wrap_string="\#{value}"
 
 systemd_service_name="tmux.service"
-systemd_unit_file_path="$HOME/.config/systemd/user/${systemd_service_name}"
+systemd_config_path="$HOME/.config/systemd/user"
+systemd_unit_file_path="${systemd_config_path}/${systemd_service_name}"
 
 systemd_tmux_server_start_cmd_option="@continuum-systemd-start-cmd"
 systemd_tmux_server_start_cmd_default="new-session -d"

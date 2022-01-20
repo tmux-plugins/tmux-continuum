@@ -25,7 +25,7 @@ template() {
 
 	ExecStop=${resurrect_save_script_path}
 	ExecStop=${tmux_path} kill-server
-	KillMode=none
+	KillMode=control-group
 
 	RestartSec=2
 

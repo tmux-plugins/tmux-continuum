@@ -11,7 +11,7 @@ template() {
 	local options="$@"
 	local content=""
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "$(realpath ${CURRENT_DIR}/../../../tmux-resurrect/scripts/save.sh)")"
-	local tmux_path="$(which tmux)"
+	local tmux_path="$(command -v tmux)"
 
 	read -r -d '' content <<-EOF
 	[Unit]

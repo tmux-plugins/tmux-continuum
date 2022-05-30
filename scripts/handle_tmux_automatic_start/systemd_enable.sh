@@ -51,7 +51,6 @@ systemd_unit_file() {
 	local systemd_tmux_server_start_cmd="$(get_tmux_option "${systemd_tmux_server_start_cmd_option}" "${systemd_tmux_server_start_cmd_default}" )"
 	local tmux_start_script_path="${CURRENT_DIR}/linux_start_tmux.sh"
 	local systemd_unit_file=$(template "${tmux_start_script_path}" "${options}")
-	mkdir -p "$(dirname ${systemd_unit_file_path})"
 	echo "$systemd_unit_file"
 }
 
@@ -60,8 +59,13 @@ write_unit_file() {
 }
 
 write_unit_file_unless_exists() {
-	if ! [ -e "${systemd_unit_file_path}" ]; then
-    write_unit_file
+
+	local systemd_unit_file_dir=$(dirname ${systemd_unit_file_path})
+	if ! [ -d $systemd_unit_file_dir ]; then
+		mkdir -p $systemd_unit_file_dir
+		write_unit_file
+	elif ! [ -e "${systemd_unit_file_path}" ]; then
+    	write_unit_file
 	fi
 }
 

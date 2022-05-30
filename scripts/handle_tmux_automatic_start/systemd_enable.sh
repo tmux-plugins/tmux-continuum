@@ -55,22 +55,21 @@ systemd_unit_file() {
 }
 
 write_unit_file() {
-  systemd_unit_file > "${systemd_unit_file_path}"
+	systemd_unit_file > "${systemd_unit_file_path}"
 }
 
 write_unit_file_unless_exists() {
-
 	local systemd_unit_file_dir=$(dirname ${systemd_unit_file_path})
 	if ! [ -d $systemd_unit_file_dir ]; then
 		mkdir -p $systemd_unit_file_dir
 		write_unit_file
 	elif ! [ -e "${systemd_unit_file_path}" ]; then
-    	write_unit_file
+		write_unit_file
 	fi
 }
 
 main() {
-  write_unit_file_unless_exists
+	write_unit_file_unless_exists
 	enable_tmux_unit_on_boot
 }
 main

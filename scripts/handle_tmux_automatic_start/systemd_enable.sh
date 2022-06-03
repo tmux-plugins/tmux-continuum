@@ -1,5 +1,8 @@
 #!/usr/bin/env bash
 
+# Maintainer: Sven Vowe @nuclearglow
+# Contact maintainer for any change to this file.
+
 CURRENT_DIR="$( dirname ${BASH_SOURCE[0]} )"
 
 source "$CURRENT_DIR/../helpers.sh"

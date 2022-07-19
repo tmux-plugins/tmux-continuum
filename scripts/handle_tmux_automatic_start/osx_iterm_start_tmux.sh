@@ -10,7 +10,7 @@ start_iterm_and_run_tmux() {
 
 		# open iterm window
 		try
-			set _session to current session of current terminal
+			set _session to current session of current window
 		on error
 			set _term to (make new terminal)
 			tell _term
@@ -31,7 +31,7 @@ resize_window_to_full_screen() {
 	osascript <<-EOF
 	tell application "iTerm"
 		set winID to id of window 1
-		tell i term application "Finder"
+		tell application "Finder"
 			set desktopSize to bounds of window of desktop
 		end tell
 		set bounds of window id winID to desktopSize
@@ -48,7 +48,7 @@ resize_to_true_full_screen() {
 		# short wait for iTerm to gain focus
 		delay 0.1
 		# Command + Enter for fullscreen
-		tell i term application "System Events"
+		tell application "System Events"
 			key code 36 using {command down}
 		end tell
 	end tell

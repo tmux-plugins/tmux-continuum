@@ -12,6 +12,12 @@ print_status() {
 	if [ $save_int -gt 0 ]; then
 		style_wrap="$(get_tmux_option "$status_on_style_wrap_option" "")"
 		status="$save_int"
+		local tstamp_option="$(get_tmux_option "$status_timestamp_option")"
+		local tstamp_format="$(get_tmux_option "$status_timestamp_format_option" "%I:%M %p")"
+		if [ $tstamp_option == "on" ]; then
+		  local tstamp="$(date +"$tstamp_format" -d @$(get_tmux_option "$last_auto_save_option"))"
+			status="$status <$tstamp>"
+		fi
 	else
 		style_wrap="$(get_tmux_option "$status_off_style_wrap_option" "")"
 		status="off"

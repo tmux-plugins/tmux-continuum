@@ -65,6 +65,8 @@ main() {
 	local tmux_start_script_path="${CURRENT_DIR}/osx_${strategy}_start_tmux.sh"
 
 	local launchd_plist_file_content="$(template "$tmux_start_script_path" "$fullscreen_option_value")"
-	echo "$launchd_plist_file_content" > "$osx_auto_start_file_path"
+	if ! diff "$osx_auto_start_file_path" <(echo "$launchd_plist_file_content") &>/dev/null ; then
+		echo "$launchd_plist_file_content" > "$osx_auto_start_file_path"
+	fi
 }
 main

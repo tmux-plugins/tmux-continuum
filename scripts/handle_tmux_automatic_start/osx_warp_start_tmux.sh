@@ -9,7 +9,7 @@ start_warp_and_run_tmux() {
 		activate
 		delay 1
 		tell application "System Events" to tell process "warp"
-			keystroke "tmux attach"
+			keystroke "tmux"
 			key code 36
 		end tell
 	end tell

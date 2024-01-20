@@ -1,3 +1,5 @@
+# Maintainer: Dimitar Nizamov @dimitur2204 
+# Contact maintainer for any change to this file.
 #!/usr/bin/env bash
 
 # for "true full screen" call the script with "fullscreen" as the first argument
@@ -5,10 +7,10 @@ TRUE_FULL_SCREEN="$1"
 
 start_terminal_and_run_tmux() {
 	osascript <<-EOF
-	tell application "alacritty"
+	tell application "Warp"
 		activate
 		delay 1
-		tell application "System Events" to tell process "alacritty"
+		tell application "System Events" to tell process "Warp"
 			set frontmost to true
 			keystroke "tmux"
 			key code 36
@@ -19,10 +21,10 @@ start_terminal_and_run_tmux() {
 
 resize_window_to_full_screen() {
 	osascript <<-EOF
-	tell application "alacritty"
+	tell application "Warp"
 		activate
 		tell application "System Events"
-			if (every window of process "alacritty") is {} then
+			if (every window of process "Warp") is {} then
 				keystroke "n" using command down
 			end if
 
@@ -30,8 +32,8 @@ resize_window_to_full_screen() {
 				set desktopSize to bounds of window of desktop
 			end tell
 
-			set position of front window of process "alacritty" to {0, 0}
-			set size of front window of process "alacritty" to {item 3 of desktopSize, item 4 of desktopSize}
+			set position of front window of process "Warp" to {0, 0}
+			set size of front window of process "Warp" to {item 3 of desktopSize, item 4 of desktopSize}
 		end tell
 	end tell
 	EOF
@@ -39,22 +41,14 @@ resize_window_to_full_screen() {
 
 resize_to_true_full_screen() {
 	osascript <<-EOF
-	tell application "Alacritty"
-		# wait for alacritty to start
+	tell application "Warp"
+		# wait for Warp to start
 		delay 1
 		activate
-		# short wait for alacritty to gain focus
+		# short wait for Warp to gain focus
 		delay 0.1
-		tell application "System Events" to tell process "Alacritty"
-			if front window exists then
-				tell front window
-					if value of attribute "AXFullScreen" then
-						set value of attribute "AXFullScreen" to false
-					else
-						set value of attribute "AXFullScreen" to true
-					end if
-				end tell
-			end if
+		tell application "System Events" to tell process "Warp"
+			keystroke "f" using {control down, command down}
 		end tell
 	end tell
 	EOF

@@ -7,7 +7,7 @@ start_terminal_and_run_tmux() {
 	osascript <<-EOF
 	tell application "kitty"
 		activate
-		delay 5
+		delay 1
 		tell application "System Events" to tell process "kitty"
 			set frontmost to true
 			keystroke "tmux"
@@ -40,8 +40,11 @@ resize_window_to_full_screen() {
 resize_to_true_full_screen() {
 	osascript <<-EOF
 	tell application "kitty"
-		activate
+		# wait for kitty to start
 		delay 1
+		activate
+		# short wait for kitty to gain focus
+		delay 0.1
 		tell application "System Events" to tell process "kitty"
 			keystroke "f" using {control down, command down}
 		end tell

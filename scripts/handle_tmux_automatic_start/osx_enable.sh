@@ -43,6 +43,8 @@ get_strategy() {
 		echo "kitty"
 	elif [[ "$options" =~ "alacritty" ]]; then
 		echo "alacritty"
+	elif [[ "$options" =~ "warp" ]]; then
+		echo "warp"
 	else
 		# Terminal.app is the default console app
 		echo "terminal"

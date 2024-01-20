@@ -42,8 +42,11 @@ resize_window_to_full_screen() {
 resize_to_true_full_screen() {
 	osascript <<-EOF
 	tell application "Warp"
-		activate
+		# wait for Warp to start
 		delay 1
+		activate
+		# short wait for Warp to gain focus
+		delay 0.1
 		tell application "System Events" to tell process "Warp"
 			keystroke "f" using {control down, command down}
 		end tell

@@ -40,8 +40,11 @@ resize_window_to_full_screen() {
 resize_to_true_full_screen() {
 	osascript <<-EOF
 	tell application "alacritty"
-		activate
+		# wait for alacritty to start
 		delay 1
+		activate
+		# short wait for alacritty to gain focus
+		delay 0.1
 		tell application "System Events" to tell process "alacritty"
 			keystroke "f" using {control down, command down}
 		end tell

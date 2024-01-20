@@ -54,9 +54,9 @@ resize_to_true_full_screen() {
 						set value of attribute "AXFullScreen" to true
 					end if
 				end tell
-			end if	
-        end tell
-    end tell
+			end if
+		end	tell
+	end	tell
 	EOF
 }
 

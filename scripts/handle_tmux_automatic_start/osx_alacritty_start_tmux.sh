@@ -39,16 +39,23 @@ resize_window_to_full_screen() {
 
 resize_to_true_full_screen() {
 	osascript <<-EOF
-	tell application "alacritty"
+	tell application "Alacritty"
 		# wait for alacritty to start
 		delay 1
 		activate
 		# short wait for alacritty to gain focus
 		delay 0.1
-		tell application "System Events" to tell process "alacritty"
-			keystroke "f" using {control down, command down}
-		end tell
-	end tell
+		tell application "System Events" to tell process "Alacritty"
+			if front window exists then
+				tell front window
+					if value of attribute "AXFullScreen" then
+						set value of attribute "AXFullScreen" to false
+					else
+						set value of attribute "AXFullScreen" to true
+					end if
+				end tell
+			end if	
+        end tell
 	EOF
 }
 

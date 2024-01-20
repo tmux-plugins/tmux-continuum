@@ -7,7 +7,7 @@ start_terminal_and_run_tmux() {
 	osascript <<-EOF
 	tell application "kitty"
 		activate
-		delay 5
+		delay 1
 		tell application "System Events" to tell process "kitty"
 			set frontmost to true
 			keystroke "tmux"

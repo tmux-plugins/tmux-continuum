@@ -7,7 +7,7 @@ start_terminal_and_run_tmux() {
 	osascript <<-EOF
 	tell application "alacritty"
 		activate
-		delay 0.5
+		delay 1
 		tell application "System Events" to tell process "alacritty"
 			set frontmost to true
 			keystroke "tmux"
@@ -39,19 +39,11 @@ resize_window_to_full_screen() {
 
 resize_to_true_full_screen() {
 	osascript <<-EOF
-	tell application "Alacritty"
+	tell application "alacritty"
 		activate
-		delay 0.5
-		tell application "System Events" to tell process "Alacritty"
-			if front window exists then
-				tell front window
-					if value of attribute "AXFullScreen" then
-						set value of attribute "AXFullScreen" to false
-					else
-						set value of attribute "AXFullScreen" to true
-					end if
-				end tell
-			end if
+		delay 1
+		tell application "System Events" to tell process "alacritty"
+			keystroke "f" using {control down, command down}
 		end tell
 	end tell
 	EOF

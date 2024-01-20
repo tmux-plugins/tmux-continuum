@@ -9,7 +9,7 @@ start_terminal_and_run_tmux() {
 	osascript <<-EOF
 	tell application "Warp"
 		activate
-		delay 5
+		delay 1
 		tell application "System Events" to tell process "Warp"
 			set frontmost to true
 			keystroke "tmux"

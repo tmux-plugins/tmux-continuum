@@ -1,13 +1,15 @@
+# Maintainer: Dimitar Nizamov @dimitur2204 
+# Contact maintainer for any change to this file.
 #!/usr/bin/env bash
 
 # for "true full screen" call the script with "fullscreen" as the first argument
 TRUE_FULL_SCREEN="$1"
 
-start_Warp_and_run_tmux() {
+start_terminal_and_run_tmux() {
 	osascript <<-EOF
 	tell application "Warp"
 		activate
-		delay 2
+		delay 5
 		tell application "System Events" to tell process "Warp"
 			set frontmost to true
 			keystroke "tmux"
@@ -50,7 +52,7 @@ resize_to_true_full_screen() {
 }
 
 main() {
-	start_Warp_and_run_tmux
+	start_terminal_and_run_tmux
 	if [ "$TRUE_FULL_SCREEN" == "fullscreen" ]; then
 		resize_to_true_full_screen
 	else

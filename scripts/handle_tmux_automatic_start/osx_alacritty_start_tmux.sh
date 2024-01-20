@@ -55,8 +55,8 @@ resize_to_true_full_screen() {
 					end if
 				end tell
 			end if
-		end	tell
-	end	tell
+		end tell
+	end tell
 	EOF
 }
 

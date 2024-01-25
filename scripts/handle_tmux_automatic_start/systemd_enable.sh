@@ -15,15 +15,17 @@ template() {
 	local content=""
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "$(realpath ${CURRENT_DIR}/../../../tmux-resurrect/scripts/save.sh)")"
 	local tmux_path="$(command -v tmux)"
+	local display="$DISPLAY"
 
 	read -r -d '' content <<-EOF
 	[Unit]
 	Description=tmux default session (detached)
 	Documentation=man:tmux(1)
+	After=graphical.target
 
 	[Service]
 	Type=forking
-	Environment=DISPLAY=:0
+	Environment=DISPLAY=${display}
 	ExecStart=${tmux_path} ${systemd_tmux_server_start_cmd}
 
 	ExecStop=${resurrect_save_script_path}

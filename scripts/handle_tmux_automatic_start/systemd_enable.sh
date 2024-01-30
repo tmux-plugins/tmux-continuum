@@ -23,7 +23,6 @@ template() {
 
 	[Service]
 	Type=forking
-	Environment=DISPLAY=:0
 	ExecStart=${tmux_path} ${systemd_tmux_server_start_cmd}
 
 	ExecStop=${resurrect_save_script_path}

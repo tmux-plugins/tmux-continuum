@@ -17,6 +17,9 @@ template() {
 	local tmux_path="$(command -v tmux)"
 
 	read -r -d '' content <<-EOF
+	#managed-by:tmux-continuum
+	# This file is managed by the tmux-continuum plugin. Manual changes
+	# will be overridden.
 	[Unit]
 	Description=tmux default session (detached)
 	Documentation=man:tmux(1)

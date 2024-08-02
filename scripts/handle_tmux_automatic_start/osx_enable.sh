@@ -41,6 +41,8 @@ get_strategy() {
 		echo "iterm"
 	elif [[ "$options" =~ "kitty" ]]; then
 		echo "kitty"
+	elif [[ "$options" =~ "wezterm" ]]; then
+		echo "wezterm"
 	elif [[ "$options" =~ "alacritty" ]]; then
 		echo "alacritty"
 	else

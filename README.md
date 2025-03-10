@@ -3,12 +3,12 @@
 Features:
 
 - continuous saving of tmux environment
-- automatic tmux start when computer/server is turned on
+- automatic tmux start when computer/server is turned on and the user logs in
 - automatic restore when tmux is started
 
 Together, these features enable uninterrupted tmux usage. No matter the computer
 or server restarts, if the machine is on, tmux will be there how you left it off
-the last time it was used.
+the last time it was used once you log back in.
 
 Tested and working on Linux, OSX and Cygwin.
 

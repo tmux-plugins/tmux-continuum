@@ -1,6 +1,6 @@
 # Automatic Tmux start
 
-Tmux is automatically started after the computer/server is turned on.
+Tmux is automatically started after the user logs in.
 
 ### OS X
 
@@ -8,7 +8,7 @@ To enable this feature:
 - put `set -g @continuum-boot 'on'` in `.tmux.conf`
 - reload tmux config with this shell command: `$ tmux source-file ~/.tmux.conf`
 
-Next time the computer is started:
+Next time the computer is started and the user logs in:
 - `Terminal.app` window will open and resize to maximum size
 - `tmux` command will be executed in the terminal window
 - if "auto restore" feature is enabled, tmux will start restoring previous env
@@ -28,10 +28,12 @@ Config options:
 - `set -g @continuum-boot-options 'alacritty,fullscreen'` - start `alacritty`
   in fullscreen
 
-Note: The first time you reboot your machine and activate this feature you may be prompted about a script requiring
-access to a system program (i.e. - System Events). If this happens tmux will not start automatically and you will need
-to go to `System Preferences -> Security & Privacy -> Accessability` and add the script to the list of apps that are
-allowed to control your computer.
+Note: The first time you reboot your machine and activate this feature you may
+be prompted about a script requiring access to a system program (i.e. - System
+Events) upon first login. If this happens tmux will not start automatically and
+you will need to go to `System Preferences -> Security & Privacy ->
+Accessability` and add the script to the list of apps that are allowed to
+control your computer.  This may require administrative access.
 
 ### Linux
 

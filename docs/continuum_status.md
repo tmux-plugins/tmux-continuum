@@ -15,3 +15,7 @@ When running, `#{continuum_status}` will show continuum save interval:
 or if continuous saving is disabled:
 
     Continuum status: off
+
+
+### tmux-powerline
+If you use the [tmux-powerline](https://github.com/erikw/tmux-powerline) statusbar, you can use the two [adapter segments](https://github.com/search?q=repo%3Aerikw%2Ftmux-powerline+path%3Asegments%2Ftmux_continuum&type=code) to get tmux-continuum support (auto-save of tmux environment + status in the statusbar).

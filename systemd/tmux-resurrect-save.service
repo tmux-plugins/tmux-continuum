@@ -1,0 +1,6 @@
+[Unit]
+Description=Auto-save tmux sessions via tmux-resurrect
+
+[Service]
+Type=oneshot
+ExecStart=/bin/bash -c 'if tmux info &>/dev/null; then "$HOME/.tmux/plugins/tmux-resurrect/scripts/save.sh" quiet; fi'

@@ -26,6 +26,28 @@ enough_time_since_last_run_passed() {
 	[ "$(current_timestamp)" -ge "$next_run" ]
 }
 
+# When auto-restore is enabled, the bootstrap (single-session) state can
+# clobber the saved full-state file BEFORE auto-restore completes, leaving
+# the `last` symlink pointing at a near-empty file. Skip auto-saves during
+# the boot window so the restore can finish first.
+in_boot_grace_window() {
+	local auto_restore_value
+	auto_restore_value="$(get_tmux_option "$auto_restore_option" "$auto_restore_default")"
+	[ "$auto_restore_value" != "on" ] && return 1
+
+	local start_time
+	start_time="$(tmux display-message -p -F '#{start_time}' 2>/dev/null)"
+	[ -z "$start_time" ] && return 1
+
+	local restore_max_delay
+	restore_max_delay="$(get_tmux_option "$auto_restore_max_delay_option" "${auto_restore_max_delay_default}")"
+	# restore_max_delay covers when restore can begin; +30s buffers the restore work itself.
+	local boot_window=$((restore_max_delay + 30))
+	local uptime=$(($(current_timestamp) - start_time))
+
+	[ "$uptime" -lt "$boot_window" ]
+}
+
 fetch_and_run_tmux_resurrect_save_script() {
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "")"
 	if [ -n "$resurrect_save_script_path" ]; then
@@ -53,7 +75,7 @@ acquire_lock() {
 }
 
 main() {
-	if supported_tmux_version_ok && auto_save_not_disabled && enough_time_since_last_run_passed && acquire_lock; then
+	if supported_tmux_version_ok && auto_save_not_disabled && ! in_boot_grace_window && enough_time_since_last_run_passed && acquire_lock; then
 		fetch_and_run_tmux_resurrect_save_script
 	fi
 }

@@ -22,28 +22,50 @@ current_tmux_server_pid() {
 		cut -f2 -d","
 }
 
-all_tmux_processes() {
-	# ignores `tmux source-file .tmux.conf` command used to reload tmux.conf
-	local user_id=$(id -u)
-	ps -u $user_id -o "command pid" |
-		\grep "^tmux" |
-		\grep -v "^tmux source"
+current_tmux_socket_path() {
+	echo "$TMUX" |
+		cut -f1 -d","
 }
 
-number_tmux_processes_except_current_server() {
-	all_tmux_processes |
-		\grep -v " $(current_tmux_server_pid)$" |
-		wc -l |
-		sed "s/ //g"
-}
+# Counts other live tmux servers running for this user.
+#
+# A tmux server holds its socket FD with the socket's filesystem path
+# in lsof's NAME column; a client only holds a peer-pointer connection
+# (no path). Unique path-shaped NAMEs across `tmux` processes equal
+# the set of servers. Each candidate is probed with `list-sessions` to
+# exclude stale socket files from crashed servers.
+#
+# Falls back to scanning the current socket's directory if lsof is
+# unavailable (covers default-dir cases, misses `-S /elsewhere/path`).
+number_other_live_tmux_servers() {
+	local current_socket socket_dir count sock candidates
+	current_socket="$(current_tmux_socket_path)"
+	count=0
 
-number_current_server_client_processes() {
-	tmux list-clients |
-		wc -l |
-		sed "s/ //g"
+	if command -v lsof >/dev/null 2>&1; then
+		# Pull every absolute-path NAME column from `lsof -U` rows where
+		# the command is `tmux` and the user is the current user. Dedupe.
+		candidates="$(lsof -U -a -c tmux -u "$(id -u)" 2>/dev/null \
+			| awk 'NR>1 && $NF ~ /^\// { print $NF }' \
+			| sort -u)"
+	elif [ -n "$current_socket" ]; then
+		# Fallback: scan the current socket's directory only.
+		socket_dir="$(dirname "$current_socket")"
+		candidates="$(find "$socket_dir" -maxdepth 1 -type s 2>/dev/null)"
+	else
+		echo 0
+		return
+	fi
+
+	for sock in $candidates; do
+		[ "$sock" = "$current_socket" ] && continue
+		if tmux -S "$sock" list-sessions >/dev/null 2>&1; then
+			count=$((count + 1))
+		fi
+	done
+	echo "$count"
 }
 
 another_tmux_server_running_on_startup() {
-	# there are 2 tmux processes (current tmux server + 1) on tmux startup
-	[ "$(number_tmux_processes_except_current_server)" -gt 1 ]
+	[ "$(number_other_live_tmux_servers)" -gt 0 ]
 }

@@ -29,8 +29,18 @@ enough_time_since_last_run_passed() {
 fetch_and_run_tmux_resurrect_save_script() {
 	local resurrect_save_script_path="$(get_tmux_option "$resurrect_save_path_option" "")"
 	if [ -n "$resurrect_save_script_path" ]; then
-		"$resurrect_save_script_path" "quiet" >/dev/null 2>&1 &
-		set_last_save_timestamp
+		# Run the save script synchronously and only advance the
+		# last-save timestamp when it actually succeeded. Previously
+		# this backgrounded the save with `&` and called
+		# set_last_save_timestamp unconditionally, so a failing or
+		# missing save script silently advanced the timestamp every
+		# interval — auto-save appeared healthy in @continuum-save-
+		# last-timestamp while nothing was being written to disk.
+		# Gating the timestamp on exit code lets the next tick retry
+		# instead of skipping ahead.
+		if "$resurrect_save_script_path" "quiet" >/dev/null 2>&1; then
+			set_last_save_timestamp
+		fi
 	fi
 }
 

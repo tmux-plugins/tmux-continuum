@@ -26,12 +26,18 @@ template() {
 	Environment=DISPLAY=:0
 	ExecStart=${tmux_path} ${systemd_tmux_server_start_cmd}
 
-	ExecStop=${resurrect_save_script_path}
-	ExecStop=${tmux_path} kill-server
-	KillMode=control-group
+	# Save the running session, then kill the server. save.sh is run via
+	# 'tmux run-shell' so it executes inside the live server (correct socket,
+	# synchronous) and finishes before kill-server; if the server is already
+	# gone it simply fails (leading '-') instead of writing an empty save that
+	# would clobber the previous good "last". KillMode=mixed plus a stop timeout
+	# give the save room to finish during a shutdown/reboot stop.
+	ExecStop=-${tmux_path} run-shell "${resurrect_save_script_path} quiet"
+	ExecStop=-${tmux_path} kill-server
+	KillMode=mixed
+	TimeoutStopSec=20
 
 	RestartSec=2
-
 	[Install]
 	WantedBy=default.target
 	EOF

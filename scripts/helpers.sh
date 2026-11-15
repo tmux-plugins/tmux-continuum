@@ -46,7 +46,7 @@ number_other_live_tmux_servers() {
 		# Pull every absolute-path NAME column from `lsof -U` rows where
 		# the command is `tmux` and the user is the current user. Dedupe.
 		candidates="$(lsof -U -a -c tmux -u "$(id -u)" 2>/dev/null \
-			| awk 'NR>1 && $NF ~ /^\// { print $NF }' \
+			| awk 'NR>1 { for (i = 1; i <= NF; i++) if ($i ~ /^\//) { print $i; break } }' \
 			| sort -u)"
 	elif [ -n "$current_socket" ]; then
 		# Fallback: scan the current socket's directory only.

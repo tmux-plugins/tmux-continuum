@@ -35,13 +35,17 @@ current_tmux_socket_path() {
 # Sockets that may belong to a tmux server of this user: everything in the
 # default socket directory (default socket and `tmux -L name`), plus sockets
 # given with `-S` on a tmux command line, which `ps` can still show.
-# These are only candidates; each one is probed before it is counted.
+# These are only candidates; each one is probed before it is counted, and only
+# sockets owned by this user are probed (the default directory is read only
+# when this user owns it).
 candidate_tmux_sockets() {
 	local socket_dir="${TMUX_TMPDIR:-/tmp}/tmux-$(id -u)"
 	local socket
-	for socket in "$socket_dir"/*; do
-		echo "$socket"
-	done
+	if [ -d "$socket_dir" ] && [ -O "$socket_dir" ]; then
+		for socket in "$socket_dir"/*; do
+			echo "$socket"
+		done
+	fi
 	ps -u "$(id -u)" -o command 2>/dev/null |
 		sed -n 's/^tmux .*-S *\([^ ][^ ]*\).*/\1/p'
 }
@@ -55,6 +59,8 @@ number_other_tmux_servers() {
 	local seen
 	while IFS= read -r candidate; do
 		[ -S "$candidate" ] || continue
+		# never connect to a socket that belongs to someone else
+		[ -O "$candidate" ] || continue
 		[ "$candidate" -ef "$current_socket" ] && continue
 		seen=""
 		for socket in "${counted[@]}"; do

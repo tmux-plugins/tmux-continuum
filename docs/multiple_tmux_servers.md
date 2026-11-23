@@ -18,3 +18,10 @@ restore" (if enabled) and will start "auto saving".
 "Auto restore" or "auto saving" **will not** happen for the second server that
 was started later with the `$ tmux -S/tmp/foo` command. The plugin will
 detect the presence of another server (`$ tmux`) and give it precedence.
+
+Another server is detected by its socket: every socket in the default socket
+directory (`$TMUX_TMPDIR` or `/tmp`, then `tmux-<uid>`) and every `-S` socket
+visible on a running `tmux` command line is probed, and a socket counts only if
+a server answers on it. Tmux clients and short-lived `tmux` commands (for
+example the ones run by plugins or by your status line) are not servers and are
+not counted.

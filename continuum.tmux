@@ -18,15 +18,6 @@ handle_tmux_automatic_start() {
 	"$CURRENT_DIR/scripts/handle_tmux_automatic_start.sh"
 }
 
-another_tmux_server_running() {
-	if just_started_tmux_server; then
-		another_tmux_server_running_on_startup
-	else
-		# script loaded after tmux server start can have multiple clients attached
-		[ "$(number_tmux_processes_except_current_server)" -gt "$(number_current_server_client_processes)" ]
-	fi
-}
-
 delay_saving_environment_on_first_plugin_load() {
 	if [ -z "$(get_tmux_option "$last_auto_save_option" "")" ]; then
 		# last save option not set, this is first time plugin load

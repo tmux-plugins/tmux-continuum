@@ -4,6 +4,9 @@
 - bugfix: "auto restore" feature stopped working
 - bugfix: prevent race condition when auto-saving with locks (@v9v)
 - Multiple users on a system can now each run continuum on their own.
+- bugfix: "auto restore" and "auto save" were skipped at random when any other
+  `tmux` process (a client, a plugin or status line command) was alive at that
+  instant; other tmux servers are now detected by their sockets
 
 ### v3.1.0, 2015-03-14
 - properly quote scripts
